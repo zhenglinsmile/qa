@@ -1,0 +1,13 @@
+server:
+  port: 8088
+
+github:
+  login:
+    scope: user
+    state: 1
+    authorize_url: https://github.com/login/oauth/authorize
+    access_token_url: https://github.com/login/oauth/access_token
+    client_id: 9e0d22cef288b4b0f2b5
+    client_secret: 1f39da010137182f44b70b3c0ec6f540d8e59de2
+    redirect_uri: http://localhost:8088/github/callback
+    github_user_uri: https://api.github.com/user
