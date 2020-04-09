@@ -1,9 +1,18 @@
 package top.fine.qa.controller;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import top.fine.qa.model.User;
+import top.fine.qa.repository.UserRepository;
+
+import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping()
@@ -24,14 +33,27 @@ public class IndexController {
     @Value("${github.login.state}")
     private String state;
 
+    @Resource
+    private UserRepository userRepository;
+
     @GetMapping
-    public String greeting() {
+    public String greeting(HttpServletRequest request) {
+        for (Cookie cookie : request.getCookies()) {
+            if ("token".equalsIgnoreCase(cookie.getName())) {
+                String token = cookie.getValue();
+                User user = userRepository.findUserByToken(token);
+                if (null != user) {
+                    request.getSession().setAttribute("user", user);
+                }
+            }
+        }
         return "index";
     }
 
     @GetMapping(value = "login")
-    public String login() {
+    public void login(HttpServletResponse response) throws IOException {
+
         String loginUrl = authorize_url + "?client_id=" + client_id + "&client_secret=" + client_secret + "&scope=" + scope + "&state=" + state;
-        return "forward:" + loginUrl;
+        response.sendRedirect(loginUrl);
     }
 }

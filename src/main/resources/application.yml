@@ -11,3 +11,19 @@ github:
     client_secret: 1f39da010137182f44b70b3c0ec6f540d8e59de2
     redirect_uri: http://localhost:8088/github/callback
     github_user_uri: https://api.github.com/user
+
+
+spring:
+  datasource:
+    hikari:
+      pool-name: Hikari-pool
+      connection-timeout: 60000
+      minimum-idle: 2
+      maximum-pool-size: 8
+    url: jdbc:mysql://47.105.33.153:3306/qa?useSSL=false&characterEncoding=utf8
+    username: root
+    platform: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
