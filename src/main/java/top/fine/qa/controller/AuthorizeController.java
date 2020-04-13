@@ -36,7 +36,7 @@ public class AuthorizeController {
     @Resource
     private UserRepository userRepository;
 
-    @GetMapping(value = "callback")
+    @GetMapping
     public String callback(@RequestParam(name = "code") String code, @RequestParam(name = "state") String state,
                            HttpServletResponse response) {
         String accessToken = authorizeProvider.getAccessToken(code, state);
@@ -53,10 +53,10 @@ public class AuthorizeController {
                 user.setName(githubUser.getLogin());
                 String userToken = UUID.randomUUID().toString().replaceAll("-", "");
                 user.setToken(userToken);
-                user.setCreateTime(String.valueOf(System.currentTimeMillis()));
+                user.setCreateTime(System.currentTimeMillis());
                 user.setModifyTime(user.getCreateTime());
                 userRepository.save(user);
-                Cookie cookie = new Cookie("token", userToken);
+                Cookie cookie = new Cookie("userToken", userToken);
                 cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
                 response.addCookie(cookie);
             }

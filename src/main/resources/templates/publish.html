@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="css/qa.css"/>
     <script src="js/bootstrap.js" type="application/javascript"></script>
 </head>
 <body>
@@ -49,41 +50,44 @@
 
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-12 col-md-12">
+        <div class="col-lg-8 col-md-6 col-xs-12 col-md-12">
             <h2><span class="glyphicon glyphicon-plus" style="font-size: 30px"> 发起</span></h2>
-            <form>
-                <div class="form-group">
-                    <label for="question-title">问题标题</label>
-                    <input type="text" class="form-control" id="question-title" placeholder="请输入问题标题">
-                </div>
-                <div class="form-group">
-                    <label for="question-content" class="col-sm-2 control-label">内容</label>
-                    <textarea class="form-control" rows="10" id="question-content"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="question-tag" class="col-sm-2 control-label">问题标签</label>
-                    <input class="form-control" rows="10" id="question-tag" placeholder="输入标签，以，号分隔"></input>
-                </div>
-                <button type="submit" class="btn btn-success btn-publish" style="margin-bottom: 15px;float: right">发布</button>
+            <form th:action="@{/publish}" method="post" th:object="${question}" th:fragment="questionForm">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="question-title">问题标题</label>
+                        <input type="text" class="form-control" name="title" id="question-title" th:field="*{title}"
+                               placeholder="请输入问题标题">
+                        <span class="help-block" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Incorrect title</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="question-content" class="col-sm-2 control-label">内容</label>
+                        <textarea class="form-control" rows="10" name="description" placeholder="请输入问题描述"
+                                  th:field="*{description}" id="question-content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="question-tag" class="col-sm-2 control-label">问题标签</label>
+                        <input class="form-control" rows="10" name="tag" th:field="*{tag}" id="question-tag"
+                               placeholder="输入标签，以，号分隔"></input>
+                    </div>
+                    <!--<div class="alert alert-danger alert-dismissible" role="alert" th:text="${error}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>-->
+
+                    <button type="submit" class="btn btn-success btn-publish">发布
+                    </button>
+                </fieldset>
             </form>
         </div>
-        <div class="col-lg-6 col-md-6 col-xs-12 col-md-12">
-            <h3>注意事项</h3>
-            <span>• 问题标题: 请用精简的语言描述您发布的问题，不超过25字</span><br/>
-            <span>• 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</span><br/>
-            <span>• 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字</span><br/>
+        <div class="col-lg-4 col-md-6 col-xs-12 col-md-12">
+            <div class="guid-content">
+                <h3>注意事项</h3>
+                <span>• 问题标题: 请用精简的语言描述您发布的问题，不超过25字</span><br/>
+                <span>• 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</span><br/>
+                <span>• 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字</span><br/>
+            </div>
         </div>
     </div>
 </div>
-<style>
-    .main {
-        margin: 30px;
-        background-color: white;
-    }
-
-    body {
-        background-color: #efefef;
-    }
-</style>
 </body>
 </html>

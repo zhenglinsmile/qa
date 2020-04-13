@@ -1,5 +1,6 @@
 package top.fine.qa.controller;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -38,12 +39,15 @@ public class IndexController {
 
     @GetMapping
     public String greeting(HttpServletRequest request) {
-        for (Cookie cookie : request.getCookies()) {
-            if ("token".equalsIgnoreCase(cookie.getName())) {
-                String token = cookie.getValue();
-                User user = userRepository.findUserByToken(token);
-                if (null != user) {
-                    request.getSession().setAttribute("user", user);
+        Cookie[] cookies = request.getCookies();
+        if (ArrayUtils.isNotEmpty(cookies)) {
+            for (Cookie cookie : cookies) {
+                if ("userToken".equalsIgnoreCase(cookie.getName())) {
+                    String token = cookie.getValue();
+                    User user = userRepository.findUserByToken(token);
+                    if (null != user) {
+                        request.getSession().setAttribute("user", user);
+                    }
                 }
             }
         }

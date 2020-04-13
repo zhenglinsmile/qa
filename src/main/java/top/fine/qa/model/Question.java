@@ -1,33 +1,36 @@
 package top.fine.qa.model;
 
-import lombok.Data;
 
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-/**
- * @description: description
- * @author: zhengLin
- * @version: 1.0
- * @create: 2020-04-08 15:18
- **/
-@Entity
 @Data
-public class User {
+@Entity
+public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long accountId;
-
     private String name;
 
-    private String token;
+    private String description;
+
+    private String tag;
+
+    private Long author;
+
+    private Integer readCnt;
+
+    private Integer commentCnt;
+
+    private Integer likeCnt;
+
+    private Integer unLikeCnt;
 
     private Long createTime;
 
