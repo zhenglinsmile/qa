@@ -2,7 +2,6 @@ package top.fine.qa.model;
 
 import lombok.Data;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,5 +31,4 @@ public class User {
     private Long createTime;
 
     private Long modifyTime;
-
 }

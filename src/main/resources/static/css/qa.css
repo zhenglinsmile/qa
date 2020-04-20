@@ -26,3 +26,12 @@ body {
 .has-error .help-block, .has-error .control-label{
     color: #b94a48;
 }
+.img-size{
+    width: 48px;
+    height: 48px;
+}
+.text-desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}

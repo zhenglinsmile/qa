@@ -14,11 +14,13 @@
 <div class="container-fluid main">
     <div class="row main">
         <div class="col-lg-8 col-md-6 col-xs-12 col-md-12">
+            <h2><span class="glyphicon glyphicon-list" style="font-size: 30px"> 发现</span></h2>
+            <br/>
             <div class="media" th:each="question : ${questions}">
-                <div class="media-left">
+                <div class="media-left text-desc">
                     <a href="#">
-                        <img class="media-object img-rounded"
-                             src="https://www.baidu.com/link?url=PhLp5t6lg6_yHJnbqhK5lHpJVyAQ_vi4twuv1klzg7OIbR0abMr6JarG7inlvwv_l1L3M_nRQX7HFeRDQf35H52atQREumdkJ8jbJllbMVdmSPONeysTwrC2klTi_xz-gGZZkyN3Ci2g7AfLtjFDDqRt9YjzkbcwRQtYAh66hxt_jyY08h2zEroBHo2rgCwQq2CX8XIv_JBjRFQ9GymuzYBKexgpDyf5IVjdGgXJTuoM4o_hvMw28Ca-u-zUVwGgxi1YpDogoC6IKxVz3EH1r6MIbo2TXHz5An4knAtpGotFQFm3hKjkOEEMXZKOGGj-XPFpVCpeZ5gcsT-ccqkWmGLEEoJw6nbg9BRZZqozS7Qftcl-cxllckJQUZ1MUOwviysjFf7IdPHF1cd196tReQSowJN3ioMNPItjFCMYcfiUhWbnxrn2UhVwMh6s0oG3j5y6oRjLsFEWf7joqbV8d-sdEXZxBwNYe9mdIoOTSgBDWAXj6xmC8SQvoVqXcJBL6Th9qUCPZVmFIhBfcnnXBWsL8SPmS6AIXiN8Ma4iKozHnrWwsGpqbn8cd9ATfQzQ1Rk33MYRRwllrafumrC5E8CKnTJvjeovH9LAEQTu4yC&timg=https%3A%2F%2Fss0.bdstatic.com%2F94oJfD_bAAcT8t7mm9GUKT-xh_%2Ftimg%3Fimage%26quality%3D100%26size%3Db4000_4000%26sec%3D1587375418%26di%3D9ebe8db49c6c9f820d9e4af9aec473d6%26src%3Dhttp%3A%2F%2Fbbs.jooyoo.net%2Fattachment%2FMon_0905%2F24_65548_2835f8eaa933ff6.jpg&click_t=1587375420155&s_info=1903_936&wd=&eqid=85260140000ab303000000035e9d6d39">
+                        <img class="media-object img-size"
+                             src="https://avatars0.githubusercontent.com/u/63109857?s=400&v=4">
                     </a>
                 </div>
                 <div class="media-body">
@@ -30,10 +32,29 @@
                             th:text="${#dates.format(question.createTime,'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
             </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <div class="col-lg-4 col-md-6 col-xs-12 col-md-12">
             <div class="guid-content">
-                <h3>注意事项</h3>
+                <h3>活动推荐</h3>
                 <span>• 问题标题: 请用精简的语言描述您发布的问题，不超过25字</span><br/>
                 <span>• 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</span><br/>
                 <span>• 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字</span><br/>
