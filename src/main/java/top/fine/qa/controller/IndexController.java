@@ -4,9 +4,12 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import top.fine.qa.model.Question;
 import top.fine.qa.model.User;
+import top.fine.qa.repository.QuestionRepository;
 import top.fine.qa.repository.UserRepository;
 
 import javax.annotation.Resource;
@@ -35,22 +38,12 @@ public class IndexController {
     private String state;
 
     @Resource
-    private UserRepository userRepository;
+    private QuestionRepository questionRepository;
 
     @GetMapping
-    public String greeting(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (ArrayUtils.isNotEmpty(cookies)) {
-            for (Cookie cookie : cookies) {
-                if ("userToken".equalsIgnoreCase(cookie.getName())) {
-                    String token = cookie.getValue();
-                    User user = userRepository.findUserByToken(token);
-                    if (null != user) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                }
-            }
-        }
+    public String greeting(Model model) {
+        Iterable<Question> questions = questionRepository.findAll();
+        model.addAttribute("questions", questions);
         return "index";
     }
 

@@ -5,47 +5,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="css/qa.css"/>
     <script src="js/bootstrap.js" type="application/javascript"></script>
+    <script src="js/jquery.js" type="application/javascript"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar">问答社区</span>
-            </button>
-            <a class="navbar-brand" href="#">问答社区</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="问题搜索">
+<div th:insert="~{head}"></div>
+<div class="container-fluid main">
+    <div class="row main">
+        <div class="col-lg-8 col-md-6 col-xs-12 col-md-12">
+            <div class="media" th:each="question : ${questions}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded"
+                             src="https://www.baidu.com/link?url=PhLp5t6lg6_yHJnbqhK5lHpJVyAQ_vi4twuv1klzg7OIbR0abMr6JarG7inlvwv_l1L3M_nRQX7HFeRDQf35H52atQREumdkJ8jbJllbMVdmSPONeysTwrC2klTi_xz-gGZZkyN3Ci2g7AfLtjFDDqRt9YjzkbcwRQtYAh66hxt_jyY08h2zEroBHo2rgCwQq2CX8XIv_JBjRFQ9GymuzYBKexgpDyf5IVjdGgXJTuoM4o_hvMw28Ca-u-zUVwGgxi1YpDogoC6IKxVz3EH1r6MIbo2TXHz5An4knAtpGotFQFm3hKjkOEEMXZKOGGj-XPFpVCpeZ5gcsT-ccqkWmGLEEoJw6nbg9BRZZqozS7Qftcl-cxllckJQUZ1MUOwviysjFf7IdPHF1cd196tReQSowJN3ioMNPItjFCMYcfiUhWbnxrn2UhVwMh6s0oG3j5y6oRjLsFEWf7joqbV8d-sdEXZxBwNYe9mdIoOTSgBDWAXj6xmC8SQvoVqXcJBL6Th9qUCPZVmFIhBfcnnXBWsL8SPmS6AIXiN8Ma4iKozHnrWwsGpqbn8cd9ATfQzQ1Rk33MYRRwllrafumrC5E8CKnTJvjeovH9LAEQTu4yC&timg=https%3A%2F%2Fss0.bdstatic.com%2F94oJfD_bAAcT8t7mm9GUKT-xh_%2Ftimg%3Fimage%26quality%3D100%26size%3Db4000_4000%26sec%3D1587375418%26di%3D9ebe8db49c6c9f820d9e4af9aec473d6%26src%3Dhttp%3A%2F%2Fbbs.jooyoo.net%2Fattachment%2FMon_0905%2F24_65548_2835f8eaa933ff6.jpg&click_t=1587375420155&s_info=1903_936&wd=&eqid=85260140000ab303000000035e9d6d39">
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user == null}"><a href="http://localhost:8088/login">登录</a></li>
-                <li class="dropdown" th:if="${session.user != null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" th:text="${session.user.name}"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">退出</a></li>
-                    </ul>
-                </li>
-            </ul>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.name}"></a>
+                    </h4>
+                    <span class="text-desc"><span th:text="${question.commentCnt}"></span> 个回复 • <span
+                            th:text="${question.readCnt}"></span> 次浏览 • <span
+                            th:text="${#dates.format(question.createTime,'yyyy-MM-dd HH:mm')}"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-xs-12 col-md-12">
+            <div class="guid-content">
+                <h3>注意事项</h3>
+                <span>• 问题标题: 请用精简的语言描述您发布的问题，不超过25字</span><br/>
+                <span>• 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料</span><br/>
+                <span>• 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字</span><br/>
+            </div>
         </div>
     </div>
-</nav>
-
-
+</div>
 </body>
 </html>

@@ -24,11 +24,9 @@ import javax.validation.Valid;
  * @create: 2020-04-09 17:00
  **/
 @Controller
-@RequestMapping(value = "publish")
-public class PublishController {
+@RequestMapping(value = "question")
+public class QuestionController {
 
-    @Resource
-    private UserRepository userRepository;
     @Resource
     private QuestionRepository questionRepository;
 
@@ -38,26 +36,5 @@ public class PublishController {
         return "publish";
     }
 
-
-    @PostMapping
-    public String publish(@Valid @ModelAttribute QuestionForm questionForm, Errors errors, HttpServletRequest request, Model model) {
-        if (errors.hasErrors()) {
-            return "publish";
-        }
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            model.addAttribute("userNoLoginMsg", "User is not login");
-            return "publish";
-        }
-        Question question = new Question();
-        question.setName(questionForm.getTitle());
-        question.setDescription(questionForm.getDescription());
-        question.setTag(questionForm.getTag());
-        question.setAuthor(user.getAccountId());
-        question.setCreateTime(System.currentTimeMillis());
-        question.setModifyTime(question.getCreateTime());
-        questionRepository.save(question);
-        return "redirect:/";
-    }
 }
 

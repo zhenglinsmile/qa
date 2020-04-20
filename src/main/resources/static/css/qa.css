@@ -16,3 +16,13 @@ body {
     margin: 20px;
     line-height: 2em;
 }
+
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.has-error .help-block, .has-error .control-label{
+    color: #b94a48;
+}

@@ -57,7 +57,7 @@ public class AuthorizeController {
                 user.setModifyTime(user.getCreateTime());
                 userRepository.save(user);
                 Cookie cookie = new Cookie("userToken", userToken);
-                cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
+                cookie.setMaxAge(60 * 60 * 24);
                 response.addCookie(cookie);
             }
         }
